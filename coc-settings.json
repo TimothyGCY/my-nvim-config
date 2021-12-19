@@ -1,9 +1,17 @@
 {
-	"explorer.width": 40,
-	"explorer.icon.enableNerdfont": true,
-	"explorer.previewAction.onHover": false,
-	"explorer.keyMappings": {
-		"<cr>": ["expandable?", "expand", "open"],
-		"v": "open:vsplit"
-	}
+  "coc.preferences.formatOnSaveFileTypes": {"json", "css", "markdown"},
+  "eslint.autoFixOnSave": true,
+  "eslint.autoFix": true,
+  "tsserver.enableJavascript": false,
+  "languageserver": {
+    "flow": {
+      "command": "flow",
+      "args": ["lsp"],
+      "filetypes": ["javascript", "javascriptreact"],
+      "initializationOptions": {},
+      "requireRootPattern": true,
+      "settings": {},
+      "rootPatterns": [".flowconfig"]
+    }
+  }
 }
