@@ -24,7 +24,6 @@ set laststatus=2
 set scrolloff=10
 set expandtab
 "let loaded_matchparen = 1
-set shell=fish
 set backupskip=/tmp/*,/private/tmp/*
 
 " incremental substitution (neovim)
@@ -91,16 +90,16 @@ endif
 " File types "{{{
 " ---------------------------------------------------------------------
 " JavaScript
-au BufNewFile,BufRead *.es6 setf javascript
+autocmd BufNewFile,BufRead *.es6 set filetype=javascript
 " TypeScript
-au BufNewFile,BufRead *.tsx setf typescriptreact
+autocmd BufNewFile,BufRead *.tsx set filetype=typescript
+" json
+autocmd BufnewFile,BufRead *.json set filetype=json
 " Markdown
 au BufNewFile,BufRead *.md set filetype=markdown
 au BufNewFile,BufRead *.mdx set filetype=markdown
 " Flow
 au BufNewFile,BufRead *.flow set filetype=javascript
-" Fish
-au BufNewFile,BufRead *.fish set filetype=fish
 
 set suffixesadd=.js,.es,.jsx,.json,.css,.less,.sass,.styl,.php,.py,.md
 

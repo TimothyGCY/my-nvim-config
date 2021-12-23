@@ -44,6 +44,7 @@ local on_attach = function(client, bufnr)
   -- formatting
   if client.name == 'tsserver' then
     client.resolved_capabilities.document_formating = false
+    client.resolved_capabilities.document_range_formatting = false
   end
 
   if client.resolved_capabilities.document_formatting then
@@ -88,6 +89,20 @@ end
 local capabilities = require('cmp_nvim_lsp').update_capabilities(
   vim.lsp.protocol.make_client_capabilities()
 )
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.preselectSupport = true
+capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
+capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
+capabilities.textDocument.completion.completionItem.deprecatedSupport = true
+capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
+capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    'documentation',
+    'detail',
+    'additionalTextEdits',
+  }
+}
 
 nvim_lsp.flow.setup {
   on_attach = on_attach,
@@ -97,7 +112,8 @@ nvim_lsp.flow.setup {
 nvim_lsp.tsserver.setup {
   on_attach = on_attach,
   filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
-  capabilities = capabilities
+  capabilities = capabilities,
+  root_dir = function() return vim.loop.cwd() end
 }
 
 nvim_lsp.diagnosticls.setup {

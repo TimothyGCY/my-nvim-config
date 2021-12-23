@@ -6,5 +6,4 @@ if !exists('*fugitive#statusline')
 endif
 
 cnoreabbrev g Git
-cnoreabbrev gopen GBrows
-e
+cnoreabbrev gopen GBrowse
