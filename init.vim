@@ -157,3 +157,12 @@ set exrc
 " Extras
 let g:python3_host_prog = 'C:\Users\USER\AppData\Local\Programs\Python\Python39\python.exe'
 let g:python_host_prog = 'C:\Users\USER\AppData\Local\Programs\Python\Python39\python.exe'
+
+" Custom short keys
+" Git
+nmap <silent> gp :Git pull<CR>
+nmap <silent> gc :Git commit<CR>
+
+" Formatter
+" Prettier
+nmap <silent> pf :CocCommand prettier.formatFile<CR>
