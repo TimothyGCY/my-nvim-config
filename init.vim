@@ -92,7 +92,7 @@ endif
 " JavaScript
 autocmd BufNewFile,BufRead *.es6 set filetype=javascript
 " TypeScript
-autocmd BufNewFile,BufRead *.tsx set filetype=typescript
+autocmd BufNewFile,BufRead *.tsx set filetype=typescriptreact
 " json
 autocmd BufnewFile,BufRead *.json set filetype=json
 " Markdown
@@ -135,9 +135,14 @@ if exists("&termguicolors") && exists("&winblend")
   set pumblend=5
   set background=dark
   " Use NeoSolarized
-  let g:neosolarized_termtrans=1
-  runtime ./colors/NeoSolarized.vim
-  colorscheme NeoSolarized
+  " let g:neosolarized_termtrans=1
+  " runtime ./colors/NeoSolarized.vim
+  " colorscheme NeoSolarized
+  
+  " Use Nightfly theme
+  let g:nightfly_termtrans=1
+  runtime ./colors/Nightfly.vim
+  colorscheme Nightfly
 endif
 
 "}}}
@@ -149,3 +154,6 @@ set exrc
 
 " vim: set foldmethod=marker foldlevel=0:
 
+" Extras
+let g:python3_host_prog = 'C:\Users\USER\AppData\Local\Programs\Python\Python39\python.exe'
+let g:python_host_prog = 'C:\Users\USER\AppData\Local\Programs\Python\Python39\python.exe'

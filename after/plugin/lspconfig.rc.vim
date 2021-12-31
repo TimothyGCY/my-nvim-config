@@ -8,6 +8,7 @@ EOF
 
 lua << EOF
 local nvim_lsp = require('lspconfig')
+local lsp_installer = require('nvim-lsp-installer')
 local protocol = require'vim.lsp.protocol'
 
 -- Use an on_attach function to only map the following keys 
@@ -44,7 +45,6 @@ local on_attach = function(client, bufnr)
   -- formatting
   if client.name == 'tsserver' then
     client.resolved_capabilities.document_formating = false
-    client.resolved_capabilities.document_range_formatting = false
   end
 
   if client.resolved_capabilities.document_formatting then
@@ -84,23 +84,31 @@ local on_attach = function(client, bufnr)
   }
 end
 
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+local servers = { 'pyright', 'rust_analyzer', 'tsserver' }
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup {
+    on_attach = on_attach,
+    flags = {
+      debounce_text_changes = 150,
+    }
+  }
+end
 
 -- Set up completion using nvim_cmp with LSP source
 local capabilities = require('cmp_nvim_lsp').update_capabilities(
   vim.lsp.protocol.make_client_capabilities()
 )
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.preselectSupport = true
-capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
-capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
-capabilities.textDocument.completion.completionItem.deprecatedSupport = true
-capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
-capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-  properties = {
-    'documentation',
-    'detail',
-    'additionalTextEdits',
+
+nvim_lsp.sumneko_lua.setup{
+  on_attach=on_attach_vim,
+  settings = {
+    Lua = {
+      runtime = { version = "LuaJIT", path = vim.split(package.path, ';'), },
+      diagnostics = { enable = true, globals = { "vim" },
+      }
+    }
   }
 }
 
@@ -113,7 +121,6 @@ nvim_lsp.tsserver.setup {
   on_attach = on_attach,
   filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
   capabilities = capabilities,
-  root_dir = function() return vim.loop.cwd() end
 }
 
 nvim_lsp.diagnosticls.setup {
@@ -176,6 +183,13 @@ nvim_lsp.diagnosticls.setup {
     }
   }
 }
+
+lsp_installer.on_server_ready(
+  function(server)
+    local opts = {}
+    server:setup(opts)
+  end        
+)
 
 -- icon
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
