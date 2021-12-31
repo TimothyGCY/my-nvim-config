@@ -24,9 +24,6 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
-require('nvim-treesitter.install').prefer_git = true
-require('nvim-treesitter.install').compilers = { "clang", "gcc" }
-
 local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 parser_config.tsx.used_by = { "javascript", "typescript.tsx" }
 EOF
