@@ -90,22 +90,23 @@ endif
 " File types "{{{
 " ---------------------------------------------------------------------
 " JavaScript
-autocmd BufNewFile,BufRead *.es6 set filetype=javascript
+" autocmd BufNewFile,BufRead *.es6 set filetype=javascript
 " TypeScript
-autocmd BufNewFile,BufRead *.tsx set filetype=typescriptreact
+" autocmd BufNewFile,BufRead *.tsx set filetype=typescriptreact
 " json
 autocmd BufnewFile,BufRead *.json set filetype=json
 " Markdown
 au BufNewFile,BufRead *.md set filetype=markdown
 au BufNewFile,BufRead *.mdx set filetype=markdown
 " Flow
-au BufNewFile,BufRead *.flow set filetype=javascript
+" au BufNewFile,BufRead *.flow set filetype=javascript
 
-set suffixesadd=.js,.es,.jsx,.json,.css,.less,.sass,.styl,.php,.py,.md
+set suffixesadd=.js,.es,.jsx,.json,.css,.less,.sass,.styl,.php,.py,.md,.dart
 
 autocmd FileType coffee setlocal shiftwidth=2 tabstop=2
 autocmd FileType ruby setlocal shiftwidth=2 tabstop=2
 autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
+autocmd FileType dart setlocal shiftwidth=2 tabstop=2
 
 "}}}
 
@@ -158,6 +159,8 @@ set exrc
 let g:python3_host_prog = 'C:\Users\USER\AppData\Local\Programs\Python\Python39\python.exe'
 let g:python_host_prog = 'C:\Users\USER\AppData\Local\Programs\Python\Python39\python.exe'
 
+let g:lsc_auto_map = v:true
+
 " Custom short keys
 " Git
 nmap <silent> gp :Git pull<CR>
@@ -166,3 +169,7 @@ nmap <silent> gc :Git commit<CR>
 " Formatter
 " Prettier
 nmap <silent> pf :CocCommand prettier.formatFile<CR>
+" Dart
+nmap <silent> df :DartFmt<CR>
+nmap <silent> fr :FlutterHotReload<CR>
+nmap <silent> fR :FlutterHotRestart<CR>

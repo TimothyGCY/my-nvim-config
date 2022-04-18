@@ -27,7 +27,15 @@ if has("nvim")
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'windwp/nvim-autopairs'
+  Plug 'windwp/nvim-ts-autotag'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'tpope/vim-commentary',
+  Plug 'ap/vim-css-color',
+  " Dart & Flutter
+  Plug 'dart-lang/dart-vim-plugin',
+  Plug 'natebosch/vim-lsc',
+  Plug 'natebosch/vim-lsc-dart',
+  Plug 'thosakwe/vim-flutter',
 endif
 
 Plug 'groenewege/vim-less', { 'for': 'less' }
